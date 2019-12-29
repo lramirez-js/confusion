@@ -23,7 +23,6 @@ const Menu = (props) => {
                 </div>
             );
         });
-        // console.log(menu)
 
         return(
             <div className="container">
