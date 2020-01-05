@@ -17,8 +17,6 @@ const RenderLeader = ({leaders}) => {
                     {leader.description}
                 </Media>
             </Media>
-
-            // <p>Leader </p>
         );
     });
 
