@@ -10,6 +10,7 @@ import Footer from './FooterComponent';
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+// We obtain the Redux state as a parameter and will be become available as props (this.props) to the Main Component (thanks to the export default at the end).
 const mapStateToProps = state => {
     return {
         dishes: state.dishes,
@@ -21,11 +22,8 @@ const mapStateToProps = state => {
 
 class Main extends Component {
 
-    // constructor(props) {
-    //     super(props);
-    // }
-
     render() {
+        
         const HomePage = () => {
             return(
                 <Home 
