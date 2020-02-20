@@ -12,8 +12,10 @@ import { connect } from 'react-redux';
 import { addComment, fetchDishes, fetchPromos, fetchComments } from '../redux/ActionCreators';
 import { actions } from 'react-redux-form';
 
-// We obtain the Redux state as a parameter and will be become available as props (this.props) to the Main Component (thanks to the export default at the end).
+// ================================================================
+// This map the Redux store state into props that will become available to this component (thanks to the export default at the end).
 const mapStateToProps = state => {
+    // So state.dishes comes from the reducer and it is mapped to props "dishes:" that will become available to the MainComponent
     return {
         dishes: state.dishes,
         comments: state.comments,
@@ -22,6 +24,7 @@ const mapStateToProps = state => {
     }    
 };
 
+// If we want to dispatch something:
 const mapDispatchToProps = (dispatch) => ({
     addComment: (dishId, rating, author, comment) => dispatch(addComment(dishId, rating, author, comment)),
     fetchDishes: () => {dispatch(fetchDishes())},
@@ -29,10 +32,12 @@ const mapDispatchToProps = (dispatch) => ({
     fetchPromos: () => {dispatch(fetchPromos())},
     resetFeedbackForm: () => { dispatch(actions.reset('feedback'))}
 });
+// ================================================================
 
 class Main extends Component {
 
     componentDidMount(){
+        // Remember that props became available thanks to mapStateToProps.
         this.props.fetchDishes();
         this.props.fetchComments();
         this.props.fetchPromos();
@@ -60,7 +65,7 @@ class Main extends Component {
                     dish={this.props.dishes.dishes.filter((dish) => dish.id === parseInt(match.params.dishId, 10))[0]}  
                     isLoading={this.props.dishes.isLoading}
                     errMess={this.props.dishes.errMess}
-                    comments={this.props.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId, 10))} 
+                    comments={this.props.comments.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId, 10))} 
                     commentsErrMess={this.props.comments.errMess}
                     // isModalOpen={false}
                     addComment={this.props.addComment}
@@ -86,4 +91,5 @@ class Main extends Component {
     }
 }
 
+// We will connect this component with the Redux Store. "withRouter" is only used if we use React-router.
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));

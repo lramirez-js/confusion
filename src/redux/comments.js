@@ -6,9 +6,9 @@ export const Comments = (state = {
 }, action) => {
     switch(action.type) {
         case ActionTypes.ADD_COMMENTS:
-            return {...state, isLoading: false, errMes: null, comments: action.payload}
+            return {...state, isLoading: false, errMess: null, comments: action.payload}
         case ActionTypes.COMMENTS_FAILED:
-            return {...state, isLoading: false, errMes: action.payload(), comments: []}
+            return {...state, isLoading: false, errMess: action.payload, comments: []}
         case ActionTypes.ADD_COMMENT:
             let comment = action.payload;
             // We know which id we have to create by the length of the state.
